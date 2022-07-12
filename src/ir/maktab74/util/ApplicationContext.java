@@ -1,5 +1,9 @@
 package ir.maktab74.util;
 
+import ir.maktab74.domain.Service;
+import ir.maktab74.repository.ServiceRepository;
+
+import java.io.File;
 import java.util.Scanner;
 
 public class ApplicationContext {
@@ -8,6 +12,8 @@ public class ApplicationContext {
     private Scanner stringScanner = null;
 
     private Scanner numberScanner = null;
+
+    private ServiceRepository serviceRepository = new ServiceRepository();
 
     public Menu getMenu() {
         if (menu == null) {
@@ -28,5 +34,9 @@ public class ApplicationContext {
             this.numberScanner = new Scanner(System.in);
         }
         return numberScanner;
+    }
+
+    public ServiceRepository getServiceRepository() {
+        return serviceRepository;
     }
 }

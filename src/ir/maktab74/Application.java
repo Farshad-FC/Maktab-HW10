@@ -1,5 +1,7 @@
 package ir.maktab74;
 
+import ir.maktab74.domain.Service;
+import ir.maktab74.repository.ServiceRepository;
 import ir.maktab74.util.ApplicationContext;
 
 import java.io.File;
@@ -12,6 +14,7 @@ import java.util.Scanner;
 public class Application {
     public static ApplicationContext context = new ApplicationContext();
     public static File serviceFile = new File("service.txt");
+    public static ServiceRepository serviceRepository;
     public static void main(String[] args) {
         run();
     }
@@ -48,7 +51,8 @@ public class Application {
 
     private static void addService() throws IOException {
         context.getMenu().showEnterCustomerFullName();
-        String name = context.getStringScanner().nextLine();
+        String input = context.getStringScanner().nextLine();
+        String[] fullName = input.split(" ");
 
         String service;
         int amount=0;
@@ -78,8 +82,13 @@ public class Application {
             }
         }
 
+//        serviceRepository.save(
+//                serviceFile,
+//                new Service(fullName[0], fullName[1], service, amount+"$")
+//        );
+
         FileWriter fileWriter = new FileWriter(serviceFile, true);
-        fileWriter.write(name + " " + service + " " + amount + "$\n");
+        fileWriter.write(input + " " + service + " " + amount + "$\n");
         fileWriter.close();
     }
 }
