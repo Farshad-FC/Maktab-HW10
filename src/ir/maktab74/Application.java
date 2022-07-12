@@ -3,12 +3,15 @@ package ir.maktab74;
 import ir.maktab74.util.ApplicationContext;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Application {
     public static ApplicationContext context = new ApplicationContext();
-    //public static File serviceFile = new File("service.txt");
+    public static File serviceFile = new File("service.txt");
     public static void main(String[] args) {
         run();
     }
@@ -37,8 +40,10 @@ public class Application {
         }
     }
 
-    private static void showServiceList() {
-
+    private static void showServiceList() throws FileNotFoundException {
+        Scanner scanner = new Scanner(serviceFile);
+        context.getMenu().showServiceListFile(scanner);
+        scanner.close();
     }
 
     private static void addService() throws IOException {
@@ -73,11 +78,8 @@ public class Application {
             }
         }
 
-        File serviceFile = new File("service.txt");
-        FileWriter fileWriter = new FileWriter(serviceFile);
-
+        FileWriter fileWriter = new FileWriter(serviceFile, true);
         fileWriter.write(name + " " + service + " " + amount + "$\n");
         fileWriter.close();
-
     }
 }
